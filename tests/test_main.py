@@ -5,7 +5,7 @@ def test_project_structure():
     assert os.path.isfile('.gitignore'), ".gitignore file is missing."
 
     # Check if docs/requirements.txt exists
-    assert os.path.isfile('requirements.txt'), "docs/requirements.txt file is missing."
+    assert os.path.isfile('requirements.txt'), "requirements.txt file is missing."
 
     # check if folder requirements exists
     assert os.path.exists('requirements'), "requirements folder is missing."
