@@ -1,0 +1,38 @@
+# Was passiert hier?
+# on: Workflow wird bei jedem Push oder Pull Request auf den main Branch ausgelöst.
+# jobs: Definiert die Jobs, die in diesem Workflow ausgeführt werden. 
+# Repository checkout: Checkt den Code aus dem Repository aus.
+# Set up Python: Richtet die Python-Umgebung ein.
+# Install dependencies: Installiert die Abhängigkeiten aus der requirements.txt Datei.  
+# Run tests: Führt die Tests im tests/ Verzeichnis mit pytest aus.
+
+# Aufgabe nach der Erstellung: Füge pytest in die datei requirements.txt ein, damit es installiert wird.
+
+name: CI Pipeline
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      #1 Repository checkout
+      - name: checkout Repository
+        uses: actions/checkout@v3
+      #2 Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      #3 Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      #4 Run tests
+      - name: Run tests
+        run: |
+          pytest tests/
